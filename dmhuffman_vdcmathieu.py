@@ -63,6 +63,10 @@ class Huffman:
 
         self.foret = []
 
+        for i in frequences:
+            feuille_to_add = Feuille(frequence=frequences[i], symbole=i)
+            self.foret.append(feuille_to_add)
+
 
 
 if __name__=='__main__':
@@ -75,3 +79,8 @@ if __name__=='__main__':
     #                 Feuille(5, 'b')),
     #           Feuille(10, 'a'))
     # A.affiche()
+
+    dic = frequences('ABRACADABRA')
+    A = Huffman(frequences=dic)
+    for f in A.foret:
+        f.affiche()
