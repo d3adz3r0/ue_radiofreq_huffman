@@ -6,6 +6,7 @@ DM Compression algo Huffman
 """
 
 import doctest
+from initial_code_pa import *
 
 def encode_ascii(text_to_encode):
     """
@@ -49,5 +50,28 @@ def frequences(text):
 
     return dictionnary
 
+class Huffman:
+
+    """ Huffman's contruction algorithm"""
+
+    def __init__(self, frequences):
+
+        """
+        Init
+        Frequences : freq's dictionnary
+        """
+
+        self.foret = []
+
+
+
 if __name__=='__main__':
     doctest.testmod()
+    # A = Arbre(18,
+    #           Arbre(8,
+    #                 Arbre(3,
+    #                       Feuille(1, 'd'),
+    #                       Feuille(2, 'c')),
+    #                 Feuille(5, 'b')),
+    #           Feuille(10, 'a'))
+    # A.affiche()
