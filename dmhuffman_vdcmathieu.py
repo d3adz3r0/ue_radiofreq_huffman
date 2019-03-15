@@ -6,7 +6,7 @@ DM Compression algo Huffman
 """
 
 import doctest
-from initial_code_pa import *
+from class_arbre_feuille import *
 
 def encode_ascii(text_to_encode):
     """
