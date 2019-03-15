@@ -5,6 +5,7 @@ DM Compression algo Huffman
 @author : Mathieu Van de catsije
 """
 
+import sys
 import doctest
 from class_arbre_feuille import *
 
@@ -67,6 +68,42 @@ class Huffman:
             feuille_to_add = Feuille(frequence=frequences[i], symbole=i)
             self.foret.append(feuille_to_add)
 
+    def pop_min(self):
+        """
+        Return the node with the lowest value and remove it from forest variable
+        :return lowest_node:
+        """
+
+        lowest_node_freq = sys.maxsize
+
+        for i in range(len(self.foret)):
+            node = self.foret[i]
+            if node.node_freq() < lowest_node_freq:
+                lowest_node_freq = node.node_freq()
+                lowest_node_position = i
+
+        lowest_node = self.foret[lowest_node_position]
+        self.foret.pop(lowest_node_position)
+
+        return lowest_node
+
+    def fusion(self):
+        """
+        Take the two lowest node of foret and fuse them into a tree. Return True if
+        the fusion is possible, false if it is not (in case all node has already been fused)
+        :return True/False:
+        """
+
+        if len(self.foret) == 1:
+            return False
+        else:
+            node_1 = Huffman.pop_min()
+            node_2 = Huffman.pop_min()
+
+            # so node_2 >= node_1
+
+            nouveau = Arbre()
+
 
 
 if __name__=='__main__':
@@ -82,5 +119,6 @@ if __name__=='__main__':
 
     dic = frequences('ABRACADABRA')
     A = Huffman(frequences=dic)
+    A.pop_min()
     for f in A.foret:
         f.affiche()

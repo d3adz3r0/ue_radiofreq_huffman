@@ -35,6 +35,9 @@ class Feuille(Arbre):
                 str(self.frequence) +
                 '(' + self.symbole + ')')
 
+    def node_freq(self):
+        return self.frequence
+
 
 if __name__ == "__main__":
     A = Arbre(18,
