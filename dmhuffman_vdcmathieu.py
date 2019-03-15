@@ -102,9 +102,11 @@ class Huffman:
 
             # so node_2 >= node_1
 
-            nouveau = Arbre()
+            nouveau = Arbre(frequence=node_1.node_freq()+node_2.node_freq(),gauche=node_1, droit=node_2)
 
+            self.foret.append(nouveau)
 
+            return True
 
 if __name__=='__main__':
     doctest.testmod()
