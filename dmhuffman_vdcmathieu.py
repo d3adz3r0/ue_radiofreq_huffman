@@ -94,11 +94,20 @@ class Huffman:
         :return True/False:
         """
 
-        if len(self.foret) == 1:
+        counter_node = 0
+        counter_tree = 0
+
+        for i in self.foret:
+            if type(i) is Feuille:
+                counter_node += 1
+            elif type(i) is Arbre:
+                counter_tree +=1
+
+        if counter_node == 0 and counter_tree == 1:
             return False
         else:
-            node_1 = Huffman.pop_min()
-            node_2 = Huffman.pop_min()
+            node_1 = Huffman.pop_min(self)
+            node_2 = Huffman.pop_min(self)
 
             # so node_2 >= node_1
 
@@ -107,6 +116,25 @@ class Huffman:
             self.foret.append(nouveau)
 
             return True
+
+    def arbre(self):
+        """
+        Comput 'fusion' as much as you can the return the final tree
+        :return final_tree:
+        """
+
+        while True:
+            bol = Huffman.fusion(self)
+            if bol is False:
+                final_tree = self.foret[0]
+                return final_tree
+
+    def affiche(self):
+        """
+        Display the final tree obtained by using the arbre method
+        """
+        Huffman.arbre(self).affiche()
+
 
 if __name__=='__main__':
     doctest.testmod()
@@ -119,8 +147,6 @@ if __name__=='__main__':
     #           Feuille(10, 'a'))
     # A.affiche()
 
-    dic = frequences('ABRACADABRA')
+    dic = frequences('azertyuiopqsdfghjklmwxcvbn')
     A = Huffman(frequences=dic)
-    A.pop_min()
-    for f in A.foret:
-        f.affiche()
+    A.affiche()

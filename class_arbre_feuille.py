@@ -19,6 +19,9 @@ class Arbre:
         self.droit.affiche(prefixes)
         prefixes.pop()
 
+    def node_freq(self):
+        return self.frequence
+
 class Feuille(Arbre):
     def __init__(self, frequence, symbole):
         """ Construit une feuille
