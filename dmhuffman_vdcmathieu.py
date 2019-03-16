@@ -97,6 +97,9 @@ class Huffman:
         counter_node = 0
         counter_tree = 0
 
+        if len(self.foret) == 1 and type(self.foret[0]) is Feuille:
+            return False
+
         for i in self.foret:
             if type(i) is Feuille:
                 counter_node += 1
@@ -135,8 +138,23 @@ class Huffman:
         """
         Huffman.arbre(self).affiche()
 
+    def compresse(self, text):
+        """
+        Take a text and return its 'translation' in Huffman code
+        :param texte:
+        :return final_text:
+        """
+        final_text = ''
 
-if __name__=='__main__':
+        dictionnary = self.arbre().table_de_codage()
+        for i in text:
+            final_text += dictionnary.get(i)
+
+        return final_text
+
+
+
+if __name__ == '__main__':
     doctest.testmod()
     # A = Arbre(18,
     #           Arbre(8,
@@ -147,6 +165,7 @@ if __name__=='__main__':
     #           Feuille(10, 'a'))
     # A.affiche()
 
-    dic = frequences('azertyuiopqsdfghjklmwxcvbn')
+    dic = frequences('ABRACADABRA')
     A = Huffman(frequences=dic)
     A.affiche()
+    print(A.compresse('ABRA'))

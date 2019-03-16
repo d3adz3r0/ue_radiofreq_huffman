@@ -22,6 +22,27 @@ class Arbre:
     def node_freq(self):
         return self.frequence
 
+    def table_de_codage(self, code='',final_coding_table=None):
+
+        if final_coding_table is None:
+            final_coding_table = {}
+        coding_table = {}
+
+        if type(self.gauche) is Feuille:
+            coding_table[self.gauche.node_symbol()] = code+'0'
+            final_coding_table.update(coding_table)
+        elif type(self.gauche) is Arbre:
+            Arbre.table_de_codage(self.gauche,code=code+'0',final_coding_table=final_coding_table)
+
+        if type(self.droit) is Feuille:
+            coding_table[self.droit.node_symbol()] = code+'1'
+            final_coding_table.update(coding_table)
+        elif type(self.droit) is Arbre:
+            Arbre.table_de_codage(self.droit, code=code + '1',final_coding_table=final_coding_table)
+
+        return final_coding_table
+
+
 class Feuille(Arbre):
     def __init__(self, frequence, symbole):
         """ Construit une feuille
@@ -40,6 +61,19 @@ class Feuille(Arbre):
 
     def node_freq(self):
         return self.frequence
+
+    def node_symbol(self):
+        return self.symbole
+
+    def table_de_codage(self, code=''):
+
+        coding_table = {}
+
+        coding_table[self.symbole] = code
+
+        return coding_table
+
+
 
 
 if __name__ == "__main__":
