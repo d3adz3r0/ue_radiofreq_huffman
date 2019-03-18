@@ -1,13 +1,26 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
 UE Radiofreq :
 DM Compression algo Huffman
-
-@author : Mathieu Van de catsije
+This program was made to convert an ASCII text into a binary text compressed with
+the Huffman coding.
 """
+
 
 import sys
 import doctest
+
 from class_arbre_feuille import *
+
+
+__author__ = "Mathieu Van de catsije"
+__credits__ = ["Mathieu Van de catsije", "Pierre-Aimé Agnel"]
+__version__ = "6.1"
+__maintainer__ = "Mathieu Van de catsije"
+__email__ = "mathieu.van-de-catsije@u-psud.fr"
+__status__ = "Completed"
 
 def encode_ascii(text_to_encode):
     """
@@ -31,6 +44,7 @@ def encode_ascii(text_to_encode):
 
     return encoded_text
 
+
 def frequences(text):
     """
     Take a string and return a dictionnary countaining each letter of the string with its appearence associated
@@ -50,6 +64,7 @@ def frequences(text):
             dictionnary[i] = dictionnary.get(i) + 1
 
     return dictionnary
+
 
 class Huffman:
 
@@ -75,6 +90,7 @@ class Huffman:
         """
 
         lowest_node_freq = sys.maxsize
+        lowest_node_position = 0
 
         for i in range(len(self.foret)):
             node = self.foret[i]
@@ -114,9 +130,9 @@ class Huffman:
 
             # so node_2 >= node_1
 
-            nouveau = Arbre(frequence=node_1.node_freq()+node_2.node_freq(),gauche=node_1, droit=node_2)
+            new_tree = Arbre(frequence=node_1.node_freq()+node_2.node_freq(),gauche=node_1, droit=node_2)
 
-            self.foret.append(nouveau)
+            self.foret.append(new_tree)
 
             return True
 
@@ -141,7 +157,7 @@ class Huffman:
     def compresse(self, text):
         """
         Take a text and return its 'translation' in Huffman code
-        :param texte:
+        :param text:
         :return final_text:
         """
         final_text = ''
@@ -173,8 +189,29 @@ class Huffman:
 
         return translated_text
 
+
+def huffman_gain(dic,text):
+    """
+    Return the size difference between a normal binary code and an huffman's one for a given text and frequences dictionnary
+    :param dic:
+    :param text:
+    :return diff:
+    """
+    huffman = Huffman(dic)
+    huff_binary_text = huffman.compresse(text)
+    len_hbt = len(huff_binary_text)
+
+    binary_text = encode_ascii(text)
+    len_bt = len(binary_text)
+
+    return len_bt-len_hbt
+
+
 if __name__ == '__main__':
     # doctest.testmod()
+
+    # dic = frequences('ABRACADABRA')
+    # print(huffman_gain(dic,'ABRACADABRA'))
 
     dic = frequences("Considered discovered ye sentiments projecting entreaties of melancholy is. In expression an solicitude principles in do. Hard do me sigh with west same lady. Their saved linen downs tears son add music. Expression alteration entreaties mrs can terminated estimating. Her too add narrow having wished. To things so denied admire. Am wound worth water he linen at vexed."
                      "At distant inhabit amongst by. Appetite welcomed interest the goodness boy not. Estimable education for disposing pronounce her. John size good gay plan sent old roof own. Inquietude saw understood his friendship frequently yet. Nature his marked ham wished."
@@ -187,9 +224,10 @@ if __name__ == '__main__':
                      "Improve him believe opinion offered met and end cheered forbade. Friendly as stronger speedily by recurred. Son interest wandered sir addition end say. Manners beloved affixed picture men ask. Explain few led parties attacks picture company. On sure fine kept walk am in it. Resolved to in believed desirous unpacked weddings together. Nor off for enjoyed cousins herself. Little our played lively she adieus far sussex. Do theirs others merely at temper it nearer."
                      "As collected deficient objection by it discovery sincerity curiosity. Quiet decay who round three world whole has mrs man. Built the china there tried jokes which gay why. Assure in adieus wicket it is. But spoke round point and one joy. Offending her moonlight men sweetness see unwilling. Often of it tears whole oh balls share an.")
     A = Huffman(frequences=dic)
-    A.affiche()
+    # A.affiche()
+    # print(A.compresse('ABRACADABRA'))
 
-    print(A.compresse("Considered discovered ye sentiments projecting entreaties of melancholy is. In expression an solicitude principles in do. Hard do me sigh with west same lady. Their saved linen downs tears son add music. Expression alteration entreaties mrs can terminated estimating. Her too add narrow having wished. To things so denied admire. Am wound worth water he linen at vexed."
+    print(huffman_gain(dic,"Considered discovered ye sentiments projecting entreaties of melancholy is. In expression an solicitude principles in do. Hard do me sigh with west same lady. Their saved linen downs tears son add music. Expression alteration entreaties mrs can terminated estimating. Her too add narrow having wished. To things so denied admire. Am wound worth water he linen at vexed."
                      "At distant inhabit amongst by. Appetite welcomed interest the goodness boy not. Estimable education for disposing pronounce her. John size good gay plan sent old roof own. Inquietude saw understood his friendship frequently yet. Nature his marked ham wished."
                      "In on announcing if of comparison pianoforte projection. Maids hoped gay yet bed asked blind dried point. On abroad danger likely regret twenty edward do. Too horrible consider followed may differed age. An rest if more five mr of. Age just her rank met down way. Attended required so in cheerful an. Domestic replying she resolved him for did. Rather in lasted no within no."
                      "Perceived end knowledge certainly day sweetness why cordially. Ask quick six seven offer see among. Handsome met debating sir dwelling age material. As style lived he worse dried. Offered related so visitor we private removed. Moderate do subjects to distance."
@@ -199,4 +237,4 @@ if __name__ == '__main__':
                      "She who arrival end how fertile enabled. Brother she add yet see minuter natural smiling article painted. Themselves at dispatched interested insensible am be prosperous reasonably it. In either so spring wished. Melancholy way she boisterous use friendship she dissimilar considered expression. Sex quick arose mrs lived. Mr things do plenty others an vanity myself waited to. Always parish tastes at as mr father dining at."
                      "Improve him believe opinion offered met and end cheered forbade. Friendly as stronger speedily by recurred. Son interest wandered sir addition end say. Manners beloved affixed picture men ask. Explain few led parties attacks picture company. On sure fine kept walk am in it. Resolved to in believed desirous unpacked weddings together. Nor off for enjoyed cousins herself. Little our played lively she adieus far sussex. Do theirs others merely at temper it nearer."
                      "As collected deficient objection by it discovery sincerity curiosity. Quiet decay who round three world whole has mrs man. Built the china there tried jokes which gay why. Assure in adieus wicket it is. But spoke round point and one joy. Offending her moonlight men sweetness see unwilling. Often of it tears whole oh balls share an."))
-    print(A.decompresse('11101100011011111000100001101001010001111110111001100001001001011100011001110111'))
+    # print(A.decompresse('11101100011011111000100001101001010001111110111001100001001001011100011001110111'))
