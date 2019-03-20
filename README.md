@@ -51,6 +51,6 @@ It should return you :
 
 ## Acknowledgments
 
-* Python-prepa (https://python-prepa.github.io/information_theory.html)
-* Many different post on the Stackoverflow forum (https://stackoverflow.com/)
+* [Python-prepa](https://python-prepa.github.io/information_theory.html)
+* Many different post on the [Stackoverflow](https://stackoverflow.com/) forum
 
