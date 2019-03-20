@@ -83,6 +83,10 @@ class Huffman:
             feuille_to_add = Feuille(frequence=frequences[i], symbole=i)
             self.foret.append(feuille_to_add)
 
+        while True:
+            bol = Huffman.fusion(self)
+            if bol is False: break
+
     def pop_min(self):
         """
         Return the node with the lowest value and remove it from forest variable
@@ -142,11 +146,8 @@ class Huffman:
         :return final_tree:
         """
 
-        while True:
-            bol = Huffman.fusion(self)
-            if bol is False:
-                final_tree = self.foret[0]
-                return final_tree
+        final_tree = self.foret[0]
+        return final_tree
 
     def affiche(self):
         """
@@ -224,7 +225,7 @@ if __name__ == '__main__':
                      "Improve him believe opinion offered met and end cheered forbade. Friendly as stronger speedily by recurred. Son interest wandered sir addition end say. Manners beloved affixed picture men ask. Explain few led parties attacks picture company. On sure fine kept walk am in it. Resolved to in believed desirous unpacked weddings together. Nor off for enjoyed cousins herself. Little our played lively she adieus far sussex. Do theirs others merely at temper it nearer."
                      "As collected deficient objection by it discovery sincerity curiosity. Quiet decay who round three world whole has mrs man. Built the china there tried jokes which gay why. Assure in adieus wicket it is. But spoke round point and one joy. Offending her moonlight men sweetness see unwilling. Often of it tears whole oh balls share an.")
     A = Huffman(frequences=dic)
-    # A.affiche()
+    A.affiche()
     # print(A.compresse('ABRACADABRA'))
 
     print(huffman_gain(dic,"Considered discovered ye sentiments projecting entreaties of melancholy is. In expression an solicitude principles in do. Hard do me sigh with west same lady. Their saved linen downs tears son add music. Expression alteration entreaties mrs can terminated estimating. Her too add narrow having wished. To things so denied admire. Am wound worth water he linen at vexed."
@@ -237,4 +238,4 @@ if __name__ == '__main__':
                      "She who arrival end how fertile enabled. Brother she add yet see minuter natural smiling article painted. Themselves at dispatched interested insensible am be prosperous reasonably it. In either so spring wished. Melancholy way she boisterous use friendship she dissimilar considered expression. Sex quick arose mrs lived. Mr things do plenty others an vanity myself waited to. Always parish tastes at as mr father dining at."
                      "Improve him believe opinion offered met and end cheered forbade. Friendly as stronger speedily by recurred. Son interest wandered sir addition end say. Manners beloved affixed picture men ask. Explain few led parties attacks picture company. On sure fine kept walk am in it. Resolved to in believed desirous unpacked weddings together. Nor off for enjoyed cousins herself. Little our played lively she adieus far sussex. Do theirs others merely at temper it nearer."
                      "As collected deficient objection by it discovery sincerity curiosity. Quiet decay who round three world whole has mrs man. Built the china there tried jokes which gay why. Assure in adieus wicket it is. But spoke round point and one joy. Offending her moonlight men sweetness see unwilling. Often of it tears whole oh balls share an."))
-    # print(A.decompresse('11101100011011111000100001101001010001111110111001100001001001011100011001110111'))
+    print(A.decompresse('11101100011011111000100001101001010001111110111001100001001001011100011001110111'))
