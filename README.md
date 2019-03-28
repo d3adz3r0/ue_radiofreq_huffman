@@ -30,7 +30,7 @@ You can test the module is well imported by trying :
 >>> Huffman(frequences('ABRACADABRA')).compresse('ABRACADABRA')
 ```
 
-It should return you :
+It should return:
 
 ```
 01101110100010101101110
